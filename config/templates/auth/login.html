@@ -1,5 +1,18 @@
 {% extends "../base.html" %}
 {% load static %}
 {% block content %}
-  hefiohvoieshvoi
+
+<div class="container">
+  <div class="row p-5">
+    <div class="col-sm-12 col-md-3 mx-auto todos p-5 border border-primary">
+      <h4>Login form</h4>
+      <form action="{% url 'accounts:home' %}" method="POST" class="">
+        {% csrf_token %}
+        {{form}}
+        <br>
+        <input type="submit" value="Login" class="btn btn-outline-success mt-4">
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock content %}
