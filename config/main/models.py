@@ -36,12 +36,16 @@ class Article(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
     category = models.ForeignKey(
-        Category, on_delete=models.PROTECT, related_name='articles')
+        Category, on_delete=models.PROTECT, related_name='articles_cat')
     image = models.ImageField(upload_to='article/%Y/%m/%d')
     author = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name='articles')
-    published = models.DateTimeField(auto_now_add=True)
+        User, on_delete=models.PROTECT, related_name='articles_user')
+    published = models.DateField(auto_now_add=True)
     body = models.TextField()
+    tag = models.ManyToManyField(Tag, related_name='articles_tag')
+
+    class Meta:
+        ordering = ["-id"]
 
     def __str__(self):
         return self.title

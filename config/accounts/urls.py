@@ -6,8 +6,11 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
-    path('', views.home_page, name='home'),
+    
     # Standart Auth views from Django
     path("login/", auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
     path("logout/", auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
+    
+    # method
+    path('contact/', views.Contact.as_view(), name='contact'),
 ]

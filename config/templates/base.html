@@ -38,7 +38,7 @@
     <header class="main-header">
 
         <div class="container text-center">
-            <a class="site-branding" href="#">
+            <a class="site-branding" href="{% url 'main:home' %}">
                 <h1 class="site-title">
                     Kingfisher
                 </h1>
@@ -58,12 +58,13 @@
                     </div>
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'main:home' %}">Home</a></li>
+
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account</a>
                                 <div class="dropdown-menu">
                                     <div class="dropdown-inner">
                                         <ul class="list-unstyled">
-                                            <li><a href="#">Login</a></li>
+                                            <li><a href="{% url 'account:login' %}">Login</a></li>
                                             <li><a href="#">Register</a></li>
                                         </ul>
                                     </div>
@@ -72,36 +73,39 @@
                             <li class="dropdown"><a href="archive.html" class="dropdown-toggle"
                                     data-toggle="dropdown">Category</a>
                                 <div class="dropdown-menu" style="margin-left: -100.625px;">
-                                    {% for category in all_categories %}
-                                    <a href="#" class="dropdown-item">{{category.name}}</a>
-                                    {% endfor %}
+
                                     <div class="dropdown-inner">
-                                        <!-- <ul class="list-unstyled">
-                                            <li><a href="#">Text 301</a></li>
-                                            <li><a href="#">Text 302</a></li>
-                                            <li><a href="#">Text 303</a></li>
-                                            <li><a href="#">Text 304</a></li>
-                                            <li><a href="#">Text 305</a></li>
+                                        <ul class="list-unstyled">
+                                            {% for category in all_categories|slice:':4' %}
+                                            <li><a href="{% url 'main:sort_by_category' category.slug %}">
+                                                    {{category.name}}
+                                                </a>
+                                            </li>
+                                            {% endfor %}
                                         </ul>
                                         <ul class="list-unstyled">
-                                            <li><a href="#">Text 306</a></li>
-                                            <li><a href="#">Text 307</a></li>
-                                            <li><a href="#">Text 308</a></li>
-                                            <li><a href="#">Text 309</a></li>
-                                            <li><a href="#">Text 310</a></li>
+                                            {% for category in all_categories|slice:'4:8' %}
+                                            <li><a href="{% url 'main:sort_by_category' category.slug %}">
+                                                    {{category.name}}
+                                                </a>
+                                            </li>
+                                            {% endfor %}
                                         </ul>
                                         <ul class="list-unstyled">
-                                            <li><a href="#">Text 311</a></li>
-                                            <li><a href="#">Text 312</a></li>
-                                            <li><a href="#">Text 313</a></li>
-                                            <li><a href="#">Text 314</a></li>
-                                            <li><a href="#">Text 315</a></li>
-                                        </ul> -->
+                                            {% for category in all_categories|slice:'8:12' %}
+                                            <li><a href="{% url 'main:sort_by_category' category.slug %}">
+                                                    {{category.name}}
+                                                </a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="archive.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{% url 'main:list_articles' %}">Blog</a></li>
+                            <li><a href="{% url 'accounts:contact' %}">Contact</a></li>
+                            <li><a href="{% url 'accounts:contact' %}">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -118,14 +122,14 @@
         <div class="wrap-footer">
             <div class="container">
                 <ul class="list-inline top-link link">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Google +</a></li>
-                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/">Instagram</a></li>
+                    <li><a href="https://twitter.com/">Twitter</a></li>
+                    <li><a href="https://www.google.com/">Google +</a></li>
+                    <li><a href="https://www.pinterest.com/">Pinterest</a></li>
                 </ul>
                 <div class="copyright">
-                    <span>Copyright © 20xx - Designed by <a href="https://www.Zerotheme.com">Zerotheme</a></span>
+                    <span>Copyright © 20xx - Designed by <a href="#">Zerotheme</a></span>
                 </div>
             </div>
         </div>

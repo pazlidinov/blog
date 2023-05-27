@@ -3,16 +3,17 @@
 {% block content %}
 
 <div class="container">
-  <div class="row p-5">
-    <div class="col-sm-12 col-md-3 mx-auto todos p-5 border border-primary">
+  <div class="row ">
+    <div class="col-sm-6 d-flex justify-content-center">
       <h4>Login form</h4>
-      <form action="{% url 'accounts:home' %}" method="POST" class="">
+      <form action="{% url 'main:home' %}" method="POST">
         {% csrf_token %}
         {{form}}
         <br>
-        <input type="submit" value="Login" class="btn btn-outline-success mt-4">
+        <input type="submit" value="Log in" class="btn btn-outline-success mt-4">
       </form>
     </div>
   </div>
 </div>
+
 {% endblock content %}

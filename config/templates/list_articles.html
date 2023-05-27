@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- /////////////////////////////////////////Content -->
+<div id="page-content">
+		
+    <div class="box-content">
+        <div class="container">
+            <!-----------------Content-------------------->
+            {% for item in object_list %}
+            <article>
+                <div class="wrap-post"><!--Start Box-->
+                    <div class="entry-header">
+                        <h2 class="entry-title"><a href="{% url 'main:detail' item.id %}">{{item.title}}</a></h2>
+                        <span class="entry-meta">
+                            <ul class="list-inline link">
+                                <li>By <a href="#">{{item.author}}</a></li>
+                                <li><a href="#">{{item.published}}</a></li>
+                                <li><a href="#">0 comments</a></li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="post-thumbnail-wrap">
+                        <div class="portfolio-box">
+                            <img src="{{item.image.url}}" class="img-responsive" alt="">
+                        </div>
+                    </div>
+                    <div class="entry-content">
+                        <span class="tags-links">
+                            {% for i in item.tag.all %}
+                            <a href="{% url 'main:sort_by_teg' i.slug %}" rel="tag">{{i.name}}</a>
+                            {% endfor %}
+                        </span>
+                        <p>{{item.body|truncatechars:300}}</p>
+                        <a class="btn btn-skin" href="{% url 'main:detail' item.id %}">Read More</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+		
+{% endblock content %}
