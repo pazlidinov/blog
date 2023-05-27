@@ -3,40 +3,152 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Free Bootstrap Themes by Zerotheme dot com - Free Responsive Html5 Templates">
+    <meta name="author" content="https://www.Zerotheme.com">
 
-    <title>BLOG</title>
+    <title>Kingfisher</title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+
+
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Owl Carousel Assets -->
+    <link href="{% static 'owl-carousel/owl-carousel.css' %}" rel="stylesheet">
+    <!-- <link href="owl-carousel/owl.theme.css" rel="stylesheet"> -->
+
+    <!-- jQuery and Modernizr-->
+    <script src="{% static 'js/jquery-2.1.1.js' %}"></script>
+
+
 </head>
 
 <body>
-    <div class="container mx-auto p-2">
-        {% if request.user.is_authenticated %}
-        <a class='btn btn-primary' href="{% url 'accounts:home' %}">HOME</a>
+    <!--Top-->
+    <header class="main-header">
 
-        <a class="text-decoration-none" href="{% url 'accounts:logout' %}">LOGOUT</a>
-        {% else %}
-        <a class="text-decoration-none" href="{% url 'accounts:login' %}">LOGIN</a>
-        {% endif %}
+        <div class="container text-center">
+            <a class="site-branding" href="#">
+                <h1 class="site-title">
+                    Kingfisher
+                </h1>
+                <p class="site-description">
+                    Vestibulum posuere molestie risus
+                </p>
+            </a><!-- .site-branding -->
+        </div>
 
-    </div>
+        <!--Navigation-->
+        <div id="menu-wrapper">
+            <nav id="menu" class="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Home</a></li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account</a>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-inner">
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Login</a></li>
+                                            <li><a href="#">Register</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="dropdown"><a href="archive.html" class="dropdown-toggle"
+                                    data-toggle="dropdown">Category</a>
+                                <div class="dropdown-menu" style="margin-left: -203.625px;">
+                                    {% for category in all_categories %}
+                                    <a href="#" class="dropdown-item">{{category.name}}</a>
+                                    {% endfor %}
+                                    <div class="dropdown-inner">
+                                        <!-- <ul class="list-unstyled">
+                                            <li><a href="#">Text 301</a></li>
+                                            <li><a href="#">Text 302</a></li>
+                                            <li><a href="#">Text 303</a></li>
+                                            <li><a href="#">Text 304</a></li>
+                                            <li><a href="#">Text 305</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Text 306</a></li>
+                                            <li><a href="#">Text 307</a></li>
+                                            <li><a href="#">Text 308</a></li>
+                                            <li><a href="#">Text 309</a></li>
+                                            <li><a href="#">Text 310</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#">Text 311</a></li>
+                                            <li><a href="#">Text 312</a></li>
+                                            <li><a href="#">Text 313</a></li>
+                                            <li><a href="#">Text 314</a></li>
+                                            <li><a href="#">Text 315</a></li>
+                                        </ul> -->
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a href="archive.html">Blog</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
 
-
+    </header>
+    <!-- /Section: intro -->
     {% block content %}
 
     {% endblock content %}
 
+    <footer class="main-footer">
+        <div class="wrap-footer">
+            <div class="container">
+                <ul class="list-inline top-link link">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Google +</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                </ul>
+                <div class="copyright">
+                    <span>Copyright © 20xx - Designed by <a href="https://www.Zerotheme.com">Zerotheme</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer -->
+    <!-- JS -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/html5shiv.js' %}"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $('#menu-wrapper').height($("#menu").height());
 
+            $('#menu').affix({
+                offset: { top: $('#menu').offset().top }
+            });
+        });
+    </script>
 </body>
 
 </html>
