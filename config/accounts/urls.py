@@ -13,4 +13,5 @@ urlpatterns = [
     
     # method
     path('contact/', views.Contact.as_view(), name='contact'),
+    path("register/", views.my_register_view, name='register'),
 ]

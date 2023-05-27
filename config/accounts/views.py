@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from .models import Contact
-from .forms import ContactForm
+from .forms import ContactForm, CustomUserCreationForm
 # Create your views here.
 
 
 class Contact(LoginRequiredMixin, CreateView):
-    model = Contact    
+    model = Contact
     form_class = ContactForm
     template_name = 'auth/contact.html'
     success_url = reverse_lazy("/")
@@ -24,3 +24,17 @@ class Contact(LoginRequiredMixin, CreateView):
             print('ok')
             return redirect('/')
         return render(request, 'auth/contact.html', {'form': form})
+
+
+def my_register_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            u.save()
+            return redirect("/")
+    else:
+        form = CustomUserCreationForm()
+        context = {
+            'form': form
+        }
+    return render(request, 'auth/register.html', context)
