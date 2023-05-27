@@ -9,3 +9,5 @@
 2.4. Qurtlar
 2.5. Gubkalar
 2.6. Cnidarians
+
+style="margin-left: -203.625px;"
