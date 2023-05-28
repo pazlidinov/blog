@@ -47,23 +47,16 @@
                 </p>
             </a><!-- .site-branding -->
         </div>
-        <center class="container">
+        <center>
             <div class="row">
 
                 <div class="col-sm-12">
-                    <form action="">
+                    <form action="{% url 'main:sort_by_title' %}" method="get">
                         <div class="row container">
-                            <div class="col-sm-11">
-                                <input type="text" class="form-control" id="search" placeholder="Search for products">
-                            </div>
-                            <div class="col-sm-1">
-                                <span class="bg-transparent text-primary">
-                                    <i class="fa fa-search"></i>
-                                </span>
+                            <div class="col-sm-12">
+                                <input name="title" type="text" class="form-control" id="search" placeholder="Search for products">
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>

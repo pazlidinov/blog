@@ -14,5 +14,10 @@ urlpatterns = [
     # sort
     path('sort_by_teg/<slug>/', views.sort_by_teg, name='sort_by_teg'),
     path('sort_by_category/<slug>/', views.sort_by_category, name='sort_by_category'),
+    path('sort_by_title/', views.sort_by_title, name='sort_by_title'),
+    
+    # comment
+    path('comment/<int:id>/', views.create_comment, name='comment'),
+    path('comment/delete/<int:id>/', views.delete_comment, name='delete_comment'),
     
 ]

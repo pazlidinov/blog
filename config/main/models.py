@@ -49,3 +49,22 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(
+        Article, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    comment = models.TextField()
+    published = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.article.slug)
+
+
+class Reply_Comment(models.Model):
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name='reply_comments')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    comment = models.TextField()
+    published = models.DateField(auto_now_add=True)
