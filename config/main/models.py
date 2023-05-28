@@ -63,8 +63,8 @@ class Comment(models.Model):
 
 
 class Reply_Comment(models.Model):
-    comment = models.ForeignKey(
+    for_comment = models.ForeignKey(
         Comment, on_delete=models.CASCADE, related_name='reply_comments')
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
-    comment = models.TextField()
+    replay_comment = models.TextField()
     published = models.DateField(auto_now_add=True)

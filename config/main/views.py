@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from django.views.generic import ListView, DetailView
-from .models import Article, Tag, Category, Comment
+from .models import Article, Tag, Category, Comment, Reply_Comment
 
 # Create your views here.
 
@@ -53,7 +53,8 @@ def sort_by_title(request):
 
 def create_comment(request, id):
     art = Article.objects.get(id=id)
-
+    # print(dir(request.POST.get("comment")))
+    print(request.POST.dict)
     if request.method == "POST":
         comment = request.POST.get("comment")
         u = None
@@ -68,7 +69,29 @@ def create_comment(request, id):
     return redirect("home:detail", id)
 
 
-def delete_comment(request, comment_id):
-    com = Comment.objects.get(pk=comment_id)
+def delete_comment(request, id):
+    com = Comment.objects.get(id=id)
     com.delete()
-    return redirect("home:detail", com.product.id)
+    return redirect("home:detail", com.article.id)
+
+
+def replay_comment(request, id):
+    com = Comment.objects.get(id=id)
+    if request.method == "POST":
+        comment = request.POST.get("reply_comment")
+        u = None
+        if request.user.is_authenticated:
+            u = request.user
+        else:
+            u = None
+
+        if len(comment) > 3:
+            Reply_Comment.objects.create(for_comment=com, user=u, replay_comment=comment)
+
+    return redirect("home:detail", com.article.id)
+
+
+def delete_replay_comment(request, id):
+    com = Reply_Comment.objects.get(id=id)
+    com.delete()
+    return redirect("home:detail", com.for_comment.article.id)

@@ -38,64 +38,112 @@
 				<!-----------------Comments-are-------------------->
 				<div class="comments-are">
 					<div id="comment">
-						<form name="formcomment" method="post" action="{% url 'main:comment' object.id %}">
-							{% csrf_token %}
-							<div class="row">
-								<div class="col-md-6">
+
+						<div class="row">
+							<div class="col-md-6">
+								<form name="formcomment" method="post" action="{% url 'main:comment' object.id %}">
+									{% csrf_token %}
 									<h3>Leave a Reply</h3>
 									<span>Your email address will not be published. Required fields are marked </span>
 									<div class="form-group">
-										<input type="text" class="form-control input-lg" name="name" id="name"
-											placeholder="Your Name" required="required" />
-									</div>
-									<div class="form-group">
 										<textarea name="comment" id="message" class="form-control" rows="4" cols="25"
-											required="required" placeholder="Message"></textarea>
+											required="required" placeholder="Comment"></textarea>
 									</div>
-								</div>
-								<div class="col-md-6">
-									<h4 class="mb-4">{{object.comments.count}} review for {{object.title|title}}
-									</h4>
+									<button type="submit" class="btn btn-skin btn-sm" name="submitcomment">send</button>
+								</form>
+							</div>
+							<div class="col-md-6">
+								<h4 class="mb-4">{{object.comments.count}} review for {{object.title|title}}
+								</h4>
 
-									{% for comment in object.comments.all %}
-									<div class="media mb-4">
-										<img src="{% static 'images/default_person_image.jpg' %}" alt="Image"
-											lass="img-fluid mr-3 mt-1" style="width: 45px;">
-										<b>
+								{% for comment in object.comments.all %}
+								<div class="media mb-4">
+									<img src="{% static 'images/default_person_image.jpg' %}" alt="Image"
+										lass="img-fluid mr-3 mt-1" style="width: 45px;">
+									<b>
 										{% if comment.user == None %}
 										Anonymus user
 										{% else %}
 										{{comment.user.username}}
-										</b>
 										{% endif %}
+									</b>
+									<br>
+									<small> - <i>{{comment.published}}</i></small>
+									<div class="media-body">
+										{{comment.comment}}
 										<br>
-										<small> - <i>{{comment.published}}</i></small>
-										<div class="media-body">
-											<p>{{comment.comment}}</p>
+										<button onclick="replay({{comment.id}})">replay</button>
+										delete-->
+										<a href="{% url 'main:delete_comment' comment.id %}">
+											<i class="fa fa-trash"></i>
+										</a>
+									</div>
 
-											<div class="float-end">
-												<a href="{% url 'main:delete_comment' comment.id %}">
-													<i class="fa fa-trash" aria-hidden="true"></i>
-												</a>
+									<div id="{{comment.id}}" style="display: none;">
+										<form name="forreplaymcomment" method="post"
+											action="{% url 'main:replay_comment' comment.id %}">
+											{% csrf_token %}
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<textarea name="reply_comment" id="message" class="form-control"
+															rows="1" cols="15" required="required"
+															placeholder="Replay Comment"></textarea>
+													</div>
+													<button type="submit" class="btn btn-skin btn-sm"
+														name="submitcomment">send</button>
+												</div>
 											</div>
-
+										</form>
+									</div>
+									{% for replay_comment in comment.reply_comments.all %}
+									<div class="media mb-4">
+										<img src="{% static 'images/default_person_image.jpg' %}" alt="Image"
+											lass="img-fluid mr-3 mt-1" style="width: 45px;">
+										<b>
+											{% if replay_comment.user == None %}
+											Anonymus user
+											{% else %}
+											{{replay_comment.user.username}}
+											{% endif %}
+										</b>
+										<br>
+										<small> - <i>{{replay_comment.published}}</i></small>
+										<div class="media-body">
+											{{replay_comment.replay_comment}}
+											<br>
+											
+											delete-->
+											<a href="{% url 'main:delete_comment' comment.id %}">
+												<i class="fa fa-trash"></i>
+											</a>
 										</div>
 									</div>
 									{% endfor %}
+
+									{% endfor %}
 								</div>
 							</div>
-							<button type="submit" class="btn btn-skin btn-sm" name="submitcomment">send</button>
-						</form>
+						</div>
 
 					</div>
+
 				</div>
 
 			</div>
 
 		</div>
-
-	</div>
-
-</div>
-
-{% endblock content %}
+		<script>
+			function replay(id) {
+				let rep_div = document.getElementById(id);
+				console.log(rep_div.style.display);
+				if (rep_div.style.display == "none") {
+					rep_div.style.display = "block"
+				}
+				else {
+					rep_div.style.display = "none"
+				}
+				console.log(rep_div);
+			}
+		</script>
+		{% endblock content %}
