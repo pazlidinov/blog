@@ -17,7 +17,7 @@
                             <ul class="list-inline link">
                                 <li>By <a href="#">{{item.author}}</a></li>
                                 <li><a href="#">{{item.published}}</a></li>
-                                <li><a href="#">0 comments</a></li>
+                                <li><a href="#">{{item.comments.count}} comments</a></li>
                             </ul>
                         </span>
                     </div>
@@ -28,6 +28,7 @@
                     </div>
                     <div class="entry-content">
                         <span class="tags-links">
+                            Tags-->
                             {% for i in item.tag.all %}
                             <a href="{% url 'main:sort_by_teg' i.slug %}" rel="tag">{{i.name}}</a>
                             {% endfor %}
