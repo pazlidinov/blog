@@ -22,5 +22,6 @@ urlpatterns = [
     
     # replay_comment
     path('replay_comment/<int:id>/', views.replay_comment, name='replay_comment'),
+    path('delete_replay_comment/<int:id>/', views.delete_replay_comment, name='delete_replay_comment'),
     
 ]
