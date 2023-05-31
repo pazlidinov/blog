@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from django_quill.fields import QuillField
+from django_quill.fields import QuillField
 # Create your models here.
 
 
@@ -42,7 +42,7 @@ class Article(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name='articles_user')
     published = models.DateField(auto_now_add=True)
-    body = models.TextField()
+    body = QuillField()
     tag = models.ManyToManyField(Tag, related_name='articles_tag')
 
     class Meta:

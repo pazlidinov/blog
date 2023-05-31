@@ -46,8 +46,7 @@
 							<div class="col-md-6">
 								<form name="formcomment" method="post" action="{% url 'main:comment' object.id %}">
 									{% csrf_token %}
-									<h3>Leave a Reply</h3>
-									<span>Your email address will not be published. Required fields are marked </span>
+									<h3>Leave a Reply</h3>									
 									<div class="form-group">
 										<textarea name="comment" id="message" class="form-control" rows="4" cols="25"
 											required="required" placeholder="Comment"></textarea>
