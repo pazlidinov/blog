@@ -21,6 +21,7 @@
 										href="{% url 'main:sort_by_published' object.published %}">{{object.published}}</a>
 								</li>
 								<li>{{object.comments.count}} comments</li>
+								<li><a href="#"><i class="fa-regular fa-thumbs-up"></i></a></li>
 							</ul>
 						</span>
 					</div>
@@ -30,7 +31,9 @@
 						</div>
 					</div>
 					<div class="entry-content">
-						{{object.body}}
+						
+						{{object.body.html|safe}}
+						
 					</div>
 				</div>
 			</article>
@@ -46,7 +49,7 @@
 							<div class="col-md-6">
 								<form name="formcomment" method="post" action="{% url 'main:comment' object.id %}">
 									{% csrf_token %}
-									<h3>Leave a Reply</h3>									
+									<h3>Leave a Reply</h3>
 									<div class="form-group">
 										<textarea name="comment" id="message" class="form-control" rows="4" cols="25"
 											required="required" placeholder="Comment"></textarea>
@@ -78,7 +81,7 @@
 										delete-->
 										<a href="{% url 'main:delete_comment' comment.id %}">
 											<i class="fa fa-trash"></i>
-										</a>
+										</a>|
 									</div>
 									<div class="row">
 										<div class="col-sm-2"></div>

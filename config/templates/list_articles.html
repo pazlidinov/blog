@@ -18,6 +18,7 @@
                                 <li>By <a href="{% url 'main:sort_by_author' item.author.id %}">{{item.author}}</a></li>
                                 <li><a href="{% url 'main:sort_by_published' item.published %}">{{item.published}}</a></li>
                                 <li>{{item.comments.count}} comments</li>
+                                <li><a href="#"><i class="fa-regular fa-thumbs-up"></i></a></li>
                             </ul>
                         </span>
                     </div>
@@ -33,7 +34,7 @@
                             <a href="{% url 'main:sort_by_teg' i.slug %}" rel="tag">{{i.name}}</a>
                             {% endfor %}|
                         </span>
-                        <p>{{item.body|truncatechars:300}}</p>
+                        <p>{{item.body.html|safe|truncatechars:300}}</p>
                         <a class="btn btn-skin" href="{% url 'main:detail' item.id %}">Read More</a>
                     </div>
                 </div>
