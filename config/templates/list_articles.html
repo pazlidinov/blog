@@ -31,7 +31,7 @@
                             Tags-->
                             {% for i in item.tag.all %}
                             <a href="{% url 'main:sort_by_teg' i.slug %}" rel="tag">{{i.name}}</a>
-                            {% endfor %}
+                            {% endfor %}|
                         </span>
                         <p>{{item.body|truncatechars:300}}</p>
                         <a class="btn btn-skin" href="{% url 'main:detail' item.id %}">Read More</a>
