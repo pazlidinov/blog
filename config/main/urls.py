@@ -15,6 +15,8 @@ urlpatterns = [
     path('sort_by_teg/<slug>/', views.sort_by_teg, name='sort_by_teg'),
     path('sort_by_category/<slug>/', views.sort_by_category, name='sort_by_category'),
     path('sort_by_title/', views.sort_by_title, name='sort_by_title'),
+    path('sort_by_author/<int:id>/', views.sort_by_author, name='sort_by_author'),
+    path('sort_by_published/<str:published>/', views.sort_by_published, name='sort_by_published'),
     
     # comment
     path('comment/<int:id>/', views.create_comment, name='comment'),

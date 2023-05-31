@@ -15,9 +15,12 @@
 						<h1 class="entry-title">{{object.title}}</h1>
 						<span class="entry-meta">
 							<ul class="list-inline link">
-								<li>By <a href="#">{{object.author}}</a></li>
-								<li><a href="#">{{object.published}}</a></li>
-								<li><a href="#">{{object.comments.count}} comments</a></li>
+								<li>By <a href="{% url 'main:sort_by_author' object.author.id %}">{{object.author}}</a>
+								</li>
+								<li><a
+										href="{% url 'main:sort_by_published' object.published %}">{{object.published}}</a>
+								</li>
+								<li>{{object.comments.count}} comments</li>
 							</ul>
 						</span>
 					</div>

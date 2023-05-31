@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 
 from django.views.generic import ListView, DetailView
 from .models import Article, Tag, Category, Comment, Reply_Comment
@@ -21,6 +22,8 @@ class Detail_Article(DetailView):
     model = Article
     template_name = 'detail_article.html'
 
+# sort
+
 
 def sort_by_teg(request, slug):
     tag = Tag.objects.get(slug=slug)
@@ -42,6 +45,23 @@ def sort_by_category(request, slug):
 
 def sort_by_title(request):
     art = Article.objects.filter(title__icontains=request.GET.get('title'))
+    data = {
+        'object_list': art,
+    }
+    return render(request, 'list_articles.html', context=data)
+
+
+def sort_by_author(request, id):
+    author = User.objects.get(id=id)
+    art = Article.objects.filter(author=author)
+    data = {
+        'object_list': art,
+    }
+    return render(request, 'list_articles.html', context=data)
+
+
+def sort_by_published(request, published):
+    art = Article.objects.filter(published=published)
     data = {
         'object_list': art,
     }
@@ -86,7 +106,8 @@ def replay_comment(request, id):
             u = None
 
         if len(comment) > 3:
-            Reply_Comment.objects.create(for_comment=com, user=u, replay_comment=comment)
+            Reply_Comment.objects.create(
+                for_comment=com, user=u, replay_comment=comment)
 
     return redirect("home:detail", com.article.id)
 
