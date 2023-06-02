@@ -12,7 +12,9 @@
                 <div id="success"></div>
                 <form name="sentMessage" id="contactForm" novalidate="novalidate" method="post">
                     {% csrf_token %}
-                    <div class="control-group">
+                    {{form}}
+                    <input type="submit" value="Register">
+                    <!-- <div class="control-group">
                         {{form.username.label}}
                         {{form.username}}
                         <p class="help-block text-danger"></p>
@@ -33,12 +35,16 @@
                         <p class="help-block text-danger"></p>
                     </div>
 
-
-
+                    <ul class="errorlist">
+                        {% for error in form.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul> -->
+<!-- 
                     <div>
                         <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">
                             Register</button>
-                    </div>
+                    </div> -->
 
                 </form>
             </div>
