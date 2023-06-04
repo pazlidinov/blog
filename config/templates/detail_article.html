@@ -21,7 +21,16 @@
 										href="{% url 'main:sort_by_published' object.published %}">{{object.published}}</a>
 								</li>
 								<li>{{object.comments.count}} comments</li>
-								<li><a href="#"><i class="fa-regular fa-thumbs-up"></i></a></li>
+								<li>
+									<a onclick="SetArticleLike({{ object.id }})">
+										{% if likes %}
+										<i id="liked" class="far fa-thumbs-up"></i>
+										{% else %}
+										<i id="liked" class="fas fa-thumbs-up"></i>
+										{% endif %}
+									</a>
+									<span id="like_count">{{object.like}}</span>
+								</li>
 								<li>
 
 									{% for i in '12345'|make_list %}
@@ -225,20 +234,35 @@
 
 				let url = `/add/rating/?data=${data}`
 
-				fetch(url)
-					.then(response => response.json())
-					.then(data => {
-						if (data["status"] == 200) {
-							product.innerHTML = Math.round(data["updated_rating"])
-						}
-						if (data["status"] == 400) {
-							product.innerHTML = 'You already rated !'
-						}
-						if (data["status"] == 404) {
-							product.innerHTML = 'Something went wrong!'
-						}
-					})
+				fetch(url).then(response => response.json()).then(data => {
+					if (data["status"] == 200) {
+						product.innerHTML = Math.round(data["updated_rating"])
+					}
+					if (data["status"] == 400) {
+						product.innerHTML = 'You already rated !'
+					}
+					if (data["status"] == 404) {
+						product.innerHTML = 'Something went wrong!'
+					}
+				})
 
 			}
+			function SetArticleLike(product_id) {
+
+				let product = document.getElementById("liked")
+				let like_count = document.getElementById("like_count")
+				let data = JSON.stringify(
+					{
+						product_id: product_id,
+					}
+				)
+
+
+
+				let url = `/add/like/?data=${data}`
+
+				fetch(url).then(response => response.json()).then(data => {if (data["status"] == 200){product.classList.remove("far");product.classList.add("fas");like_count.innerHTML = data['like']}})}
+
+
 		</script>
 		{% endblock content %}

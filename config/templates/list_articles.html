@@ -4,7 +4,7 @@
 
 <!-- /////////////////////////////////////////Content -->
 <div id="page-content">
-		
+
     <div class="box-content">
         <div class="container">
             <!-----------------Content-------------------->
@@ -16,9 +16,10 @@
                         <span class="entry-meta">
                             <ul class="list-inline link">
                                 <li>By <a href="{% url 'main:sort_by_author' item.author.id %}">{{item.author}}</a></li>
-                                <li><a href="{% url 'main:sort_by_published' item.published %}">{{item.published}}</a></li>
+                                <li><a href="{% url 'main:sort_by_published' item.published %}">{{item.published}}</a>
+                                </li>
                                 <li>{{item.comments.count}} comments</li>
-                                <li><a href="#"><i class="fa-regular fa-thumbs-up"></i></a></li>
+                                <li><span>{{item.like}} |</span><i class="fa-regular fa-thumbs-up"></i></li>
                                 <li><small class="pt-1">( {{ item.view }} Views)</small></li>
                             </ul>
                         </span>
@@ -43,7 +44,7 @@
             {% endfor %}
         </div>
     </div>
-    
+
 </div>
-		
+
 {% endblock content %}

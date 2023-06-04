@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 from django.views.generic import ListView, DetailView
 from .models import *
 import json
-from .utils import check_article_view
+from .utils import check_article_view, check_like_view, check_like_detail
 
 # Create your views here.
 
@@ -30,7 +31,8 @@ def my_def(request, pk):
         product.update_view()
     else:
         pass
-    data={'object': product}
+    data = {'object': product,
+            'likes':check_like_detail(request, pk)}
     return render(request, 'detail_article.html', context=data)
 
 
@@ -129,6 +131,8 @@ def delete_replay_comment(request, id):
     com.delete()
     return redirect("home:detail", com.for_comment.article.id)
 
+# rating
+
 
 def add_rating(request):
 
@@ -152,5 +156,20 @@ def add_rating(request):
                 user=u
             )
             return JsonResponse({"status": 200, "updated_rating": product.average_rating})
+    else:
+        return JsonResponse({"status": 404})
+
+
+# like
+
+def add_like(request):
+    data = json.loads(request.GET.get("data"))
+    if data:
+        product = Article.objects.get(pk=int(data.get("product_id")))
+        if check_like_view(request, data.get("product_id")):
+            product.update_like_plus()
+            return JsonResponse({"status": 200, 'like': product.like, })
+        else:
+            pass
     else:
         return JsonResponse({"status": 404})

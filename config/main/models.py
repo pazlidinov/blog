@@ -46,6 +46,7 @@ class Article(models.Model):
     body = QuillField()
     tag = models.ManyToManyField(Tag, related_name='articles_tag')
     view = models.PositiveIntegerField(default=0)
+    like = models.PositiveIntegerField(default=0)
 
     @property
     def average_rating(self):
@@ -57,6 +58,11 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def update_like_plus(self):
+        self.like += 1
+        self.save()
+    
 
     def update_view(self):
         self.view += 1

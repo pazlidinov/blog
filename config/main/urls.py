@@ -10,6 +10,7 @@ urlpatterns = [
     path('list_articles/', views.List_articles.as_view(), name='list_articles'),
     path('detail/<pk>/', views.my_def, name='detail'),
     path('add/rating/', views.add_rating, name="add_rating"),
+    path('add/like/', views.add_like, name="add_like"),
 
 
     # sort
