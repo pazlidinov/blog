@@ -20,17 +20,18 @@ class List_articles(ListView):
     template_name = 'list_articles.html'
 
 
-class Detail_Article(DetailView):
-    model = Article
-    template_name = 'detail_article.html'
+# class Detail_Article(DetailView):
+#     model = Article
+#     template_name = 'detail_article.html'
 
-    def my_def(request, pk):
-        product = Article.objects.get(pk=pk)
-        if check_article_view(request, pk):
-            product.update_view()
-        else:
-            pass
-        return render(request, 'detail_article.html')
+def my_def(request, pk):
+    product = Article.objects.get(pk=pk)
+    if check_article_view(request, pk):
+        product.update_view()
+    else:
+        pass
+    data={'object': product}
+    return render(request, 'detail_article.html', context=data)
 
 
 # sort

@@ -8,7 +8,7 @@ app_name = 'main'
 urlpatterns = [
     path('', views.home_page, name='home'),
     path('list_articles/', views.List_articles.as_view(), name='list_articles'),
-    path('detail/<pk>/', views.Detail_Article.as_view(), name='detail'),
+    path('detail/<pk>/', views.my_def, name='detail'),
     path('add/rating/', views.add_rating, name="add_rating"),
 
 

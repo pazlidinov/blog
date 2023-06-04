@@ -44,7 +44,7 @@ class Article(models.Model):
         User, on_delete=models.PROTECT, related_name='articles_user')
     published = models.DateField(auto_now_add=True)
     body = QuillField()
-    tag = models.ManyToManyField(Tag, related_name='articles_tag')      
+    tag = models.ManyToManyField(Tag, related_name='articles_tag')
     view = models.PositiveIntegerField(default=0)
 
     @property
@@ -55,11 +55,15 @@ class Article(models.Model):
         else:
             return 0
 
-    class Meta:
-        ordering = ["-id"]
-
     def __str__(self):
         return self.title
+
+    def update_view(self):
+        self.view += 1
+        self.save()
+
+    class Meta:
+        ordering = ["-id"]
 
 
 class Rating(models.Model):
