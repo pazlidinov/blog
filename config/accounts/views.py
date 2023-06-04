@@ -34,50 +34,9 @@ def my_register_view(request):
         if form.is_valid():
             form.save()
             print('ok1')
-            return redirect('account:login')
-            
+            return redirect('account:login')    
         
-        # form = CustomUserCreationForm(request.POST)
-
-        # username = request.POST['username'].lower()
-        # email = request.POST['email'].lower()
-        # password = request.POST['password']
-        # new = User.objects.filter(username=username)
-        # print(username)
-        # print(email)
-        # print(type(password))
-        # print(new)
-        # if new.count():
-        #     form = RegisterForm()
-        #     context = {'form': form}
-        #     return render(request, 'auth/register.html', context)
-
-        # elif username and email and password:
-        #     new_user = User.objects.create(
-        #         username=username, email=email, password=password)
-        #     new_user.save()
-        #     print('ok1')
-        #     return redirect('account:login')
-
-        # password2 = request.POST['password2'].lower()
-        # new_username=User.objects.filter(username=username)
-        # new_email=User.objects.filter(email=email)
-        # if new_username.count() and new_email.count():
-        #     print('no')
-        #     form = CustomUserCreationForm()
-        #     context = {
-        #         'form': form
-        #     }
-        #     return render(request, 'auth/register.html', context)
-        # elif username and email and password1 and password2 and password1 != password2:
-        #     new_user = User.objects.create(
-        #     username=username, email=email, password=password2)
-        #     new_user.save()
-        #     print('ok1')
-        #     return redirect("/")
-        # if form.is_valid():
-        #     form.save()
-        #     return redirect("/")
+        
 
     form = RegisterForm()
     context = {
