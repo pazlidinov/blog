@@ -28,15 +28,12 @@ class Contact(LoginRequiredMixin, CreateView):
 
 
 def my_register_view(request):
-    # print(type(User.password))
+
     if request.method == 'POST':
-        form=RegisterForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            print('ok1')
-            return redirect('account:login')    
-        
-        
+            return redirect('account:login')
 
     form = RegisterForm()
     context = {
