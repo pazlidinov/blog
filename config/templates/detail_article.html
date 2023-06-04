@@ -22,6 +22,17 @@
 								</li>
 								<li>{{object.comments.count}} comments</li>
 								<li><a href="#"><i class="fa-regular fa-thumbs-up"></i></a></li>
+								<li>
+
+									{% for i in '12345'|make_list %}
+									{% if i < object.average_rating %} <i class="fas fa-star"></i>
+										{% else %}
+										<i class="far fa-star"></i>
+										{% endif %}
+										{% endfor %}
+										<small class="pt-1">( {{ object.view }} Views)</small>
+
+								</li>
 							</ul>
 						</span>
 					</div>
@@ -31,9 +42,9 @@
 						</div>
 					</div>
 					<div class="entry-content">
-						
+
 						{{object.body.html|safe}}
-						
+
 					</div>
 				</div>
 			</article>
@@ -47,9 +58,43 @@
 
 						<div class="row">
 							<div class="col-md-6">
+								<h3>Leave a Reply</h3>
+								<p class="mb-0 mr-2">Your Rating * :</p>
+								<span class="product_rating"></span>
+								<div class="text-primary">
+									<div class="d-flex gap-3">
+										<a onclick="SetArticleRating(1, {{ object.id }} )"
+											class="text-decoration-none fs-4 text-warning d-flex flex-column text-center">
+											<i class="far fa-star" id="1"></i>
+											<span class="text-muted fs-5"></span>
+										</a>
+										<a onclick="SetArticleRating(2, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+											<i class="far fa-star" id='2'></i>
+											<span class="text-muted fs-5"></span>
+										</a>
+										<a onclick="SetArticleRating(3, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+											<i class="far fa-star" id="3"></i>
+											<span class="text-muted fs-5"></span>
+										</a>
+										<a onclick="SetArticleRating(4, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+											<i class="far fa-star" id="4"></i>
+											<span class="text-muted fs-5"></span>
+										</a>
+										<a onclick="SetArticleRating(5, {{ object.id }} )" class=" text-decoration-none fs-4 text-warning d-flex flex-column
+                                                text-center">
+											<i class="far fa-star" id="5"></i>
+											<span class="text-muted fs-5"></span>
+										</a>
+										<input type="hidden" id="token" name="csrfmiddlewaretoken" value="">
+									</div>
+
+								</div>
+
 								<form name="formcomment" method="post" action="{% url 'main:comment' object.id %}">
 									{% csrf_token %}
-									<h3>Leave a Reply</h3>
 									<div class="form-group">
 										<textarea name="comment" id="message" class="form-control" rows="4" cols="25"
 											required="required" placeholder="Comment"></textarea>
@@ -155,6 +200,45 @@
 					rep_div.style.display = "none"
 				}
 				console.log(rep_div);
+			}
+			function SetArticleRating(rating, product_id) {
+				let product = document.querySelector("#product_rating")
+
+				let data = JSON.stringify(
+					{
+						rating: rating,
+						product_id: product_id,
+					}
+				)
+				for (let rate = 1; rate < 6; rate++) {
+					let ratback = document.getElementById(rate);
+					if (rate <= rating) {
+						ratback.classList.remove('far');
+						ratback.classList.add('fas');
+					}
+					if (rate > rating) {
+						ratback.classList.remove('fas');
+						ratback.classList.add('far');
+					}
+
+				}
+
+				let url = `/add/rating/?data=${data}`
+
+				fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						if (data["status"] == 200) {
+							product.innerHTML = Math.round(data["updated_rating"])
+						}
+						if (data["status"] == 400) {
+							product.innerHTML = 'You already rated !'
+						}
+						if (data["status"] == 404) {
+							product.innerHTML = 'Something went wrong!'
+						}
+					})
+
 			}
 		</script>
 		{% endblock content %}

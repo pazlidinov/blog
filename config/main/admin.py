@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
-from .models import Category, Article, Tag, Comment, Reply_Comment
+from .models import *
 # Register your models here.
 
 admin.site.register(Comment)
 admin.site.register(Reply_Comment)
+
+admin.site.register(Rating)
 
 
 @admin.register(Category)

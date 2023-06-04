@@ -19,6 +19,7 @@
                                 <li><a href="{% url 'main:sort_by_published' item.published %}">{{item.published}}</a></li>
                                 <li>{{item.comments.count}} comments</li>
                                 <li><a href="#"><i class="fa-regular fa-thumbs-up"></i></a></li>
+                                <li><small class="pt-1">( {{ item.view }} Views)</small></li>
                             </ul>
                         </span>
                     </div>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_quill.fields import QuillField
+from django.db.models import Avg
 # Create your models here.
 
 
@@ -43,13 +44,30 @@ class Article(models.Model):
         User, on_delete=models.PROTECT, related_name='articles_user')
     published = models.DateField(auto_now_add=True)
     body = QuillField()
-    tag = models.ManyToManyField(Tag, related_name='articles_tag')
+    tag = models.ManyToManyField(Tag, related_name='articles_tag')      
+    view = models.PositiveIntegerField(default=0)
+
+    @property
+    def average_rating(self):
+        rating = self.rating.all().aggregate(Avg('value'))['value__avg']
+        if rating:
+            return str(rating)
+        else:
+            return 0
 
     class Meta:
         ordering = ["-id"]
 
     def __str__(self):
         return self.title
+
+
+class Rating(models.Model):
+    value = models.PositiveIntegerField(default=0)
+    product = models.ForeignKey(
+        Article, on_delete=models.CASCADE, related_name="rating")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Comment(models.Model):
