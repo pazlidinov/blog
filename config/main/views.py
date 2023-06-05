@@ -32,7 +32,7 @@ def my_def(request, pk):
     else:
         pass
     data = {'object': product,
-            'likes':check_like_detail(request, pk)}
+            'likes': check_like_detail(request, pk)}
     return render(request, 'detail_article.html', context=data)
 
 
@@ -81,6 +81,21 @@ def sort_by_published(request, published):
     }
     return render(request, 'list_articles.html', context=data)
 
+
+def sort_by_like(request):
+    by_like = Article.objects.all().order_by('-like')
+    data = {
+        'object_list': by_like,
+    }
+    return render(request, 'list_articles.html', context=data)
+
+
+def sort_by_rating(request):
+    by_rating = Article.objects.annotate(average_stars = Avg('rating')).order_by('-rating')
+    data = {
+        'object_list': by_rating,
+    }
+    return render(request, 'list_articles.html', context=data)
 
 # Comment
 
