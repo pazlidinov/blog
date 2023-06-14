@@ -46,8 +46,10 @@
 						</span>
 					</div>
 					<div class="post-thumbnail-wrap">
-						<div class="portfolio-box">
-							<img src="{{object.image.url}}" class="img-responsive" alt="">
+						<div>
+							<center>
+								<img src="{{object.image.url}}" class="img-responsive" alt="">
+							</center>
 						</div>
 					</div>
 					<div class="entry-content">
@@ -261,7 +263,8 @@
 
 				let url = `/add/like/?data=${data}`
 
-				fetch(url).then(response => response.json()).then(data => {if (data["status"] == 200){product.classList.remove("far");product.classList.add("fas");like_count.innerHTML = data['like']}})}
+				fetch(url).then(response => response.json()).then(data => { if (data["status"] == 200) { product.classList.remove("far"); product.classList.add("fas"); like_count.innerHTML = data['like'] } })
+			}
 
 
 		</script>

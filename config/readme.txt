@@ -1,3 +1,9 @@
+
+py manage.py runserver 5000
+shu portda ishlaydi
+ 
+
+
 1.1. Sutemizuvchilar
 1.2. Qushlar
 1.3. Baliqlar
@@ -12,6 +18,8 @@
 
 style="margin-left: -203.625px;"
 <div style="display: none">
+
+
 											<form name="forreplaymcomment" method="post"
 												action="#">
 												{% csrf_token %}
